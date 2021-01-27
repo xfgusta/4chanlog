@@ -37,10 +37,14 @@ int main(int argc, char **argv) {
     }
     
     struct memory chunk = {
-        .memory = NULL,
+        .memory = malloc(1),
         .size = 0
     };
-    
+    if(!chunk.memory) {
+        fprintf(stderr, "Not enough memory (malloc returned NULL)\n");
+        return 1;
+    }
+
     snprintf(url, n, "https://boards.4channel.org/%s/catalog.json", board);
 
     curl_easy_setopt(curl, CURLOPT_URL, url);
@@ -53,8 +57,7 @@ int main(int argc, char **argv) {
         fprintf(stderr, "curl_easy_perform() failed: %s\n",
             curl_easy_strerror(res));
         curl_easy_cleanup(curl);
-        if(chunk.memory)
-            free(chunk.memory);
+        free(chunk.memory);
         free(url);
         return 1;
     }
