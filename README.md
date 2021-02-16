@@ -11,7 +11,7 @@
 
 ### Build instruction
 
-`4chanlog` github repo: https://github.com/sirguxx/4chanlog
+`4chanlog` github repo: https://github.com/xfgusta/4chanlog
 
 ```
 $ make
